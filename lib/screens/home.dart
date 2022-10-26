@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/constants/colors.dart';
+import 'package:todo_app/model/todo.dart';
 
 import '../widgets/todo_item.dart';
 
 class Home extends StatelessWidget {
+   Home({Key? key}) : super(key: key);
+
+  final todoList = Todo.todoList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +32,8 @@ class Home extends StatelessWidget {
                       ),
                     ),
                   ),
-                  TodoItem(),
+                  for(Todo todoo in todoList)
+                  TodoItem(todo: todoo,),
                 ],
               ),
             )
@@ -39,6 +45,7 @@ class Home extends StatelessWidget {
 
   Widget searchBox() {
     return Container(
+      margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(20)),
