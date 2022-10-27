@@ -1,12 +1,19 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:todo_app/constants/colors.dart';
 import 'package:todo_app/model/todo.dart';
 
 import '../widgets/todo_item.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final todoList = Todo.todoList();
 
   @override
@@ -37,6 +44,7 @@ class Home extends StatelessWidget {
                       for (Todo todoo in todoList)
                         TodoItem(
                           todo: todoo,
+                          onTodoChanged: _handleTodoChange,
                         ),
                     ],
                   ),
@@ -78,12 +86,12 @@ class Home extends StatelessWidget {
                       '+',
                       style: TextStyle(fontSize: 40),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      print('New aDD');
+                    },
                     style: ElevatedButton.styleFrom(
-                      primary: tdBlue,
-                      minimumSize: Size(60, 60),
-                      elevation: 10
-                    ),
+                        primary: tdBlue,
+                        elevation: 10),
                   ),
                 )
               ],
@@ -92,6 +100,13 @@ class Home extends StatelessWidget {
         ],
       ),
     );
+  }
+
+
+  void _handleTodoChange(Todo todo){
+    setState(() {
+          todo.isDone = !todo.isDone;
+    });
   }
 
   Widget searchBox() {
