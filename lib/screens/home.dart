@@ -137,7 +137,10 @@ class _HomeState extends State<Home> {
     if (keyWord.isEmpty) {
       results = todoList;
     } else {
-      results = todoList.where((item) => item.todoText!.toLowerCase().contains(keyWord.toLowerCase())).toList();
+      results = todoList
+          .where((item) =>
+              item.todoText!.toLowerCase().contains(keyWord.toLowerCase()))
+          .toList();
     }
 
     setState(() {
