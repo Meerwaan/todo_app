@@ -45,6 +45,7 @@ class _HomeState extends State<Home> {
                         TodoItem(
                           todo: todoo,
                           onTodoChanged: _handleTodoChange,
+                          onDeleteItem: _deleteTodoItem,
                         ),
                     ],
                   ),
@@ -90,8 +91,7 @@ class _HomeState extends State<Home> {
                       print('New aDD');
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: tdBlue,
-                        elevation: 10),
+                        primary: tdBlue, elevation: 10),
                   ),
                 )
               ],
@@ -102,10 +102,15 @@ class _HomeState extends State<Home> {
     );
   }
 
-
-  void _handleTodoChange(Todo todo){
+  void _handleTodoChange(Todo todo) {
     setState(() {
-          todo.isDone = !todo.isDone;
+      todo.isDone = !todo.isDone;
+    });
+  }
+
+  void _deleteTodoItem(String id) {
+    setState(() {
+      todoList.removeWhere((item) => item.id == id);
     });
   }
 
